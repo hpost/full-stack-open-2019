@@ -1,0 +1,19 @@
+title Creating a new Note (SPA)
+
+note over browser: User submits form
+
+note over browser: Submit button event handler is executed
+
+note over browser: Default behavior is prevented to avoid redirect
+
+note over browser: Note is pushed to notes array
+
+note over browser: Form field is cleared
+
+note over browser: DOM is redrawn based on updated notes
+
+browser -> server: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+
+note over server: Store new note from request body
+
+server -> browser: 201 CREATED
