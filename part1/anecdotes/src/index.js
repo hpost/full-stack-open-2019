@@ -5,7 +5,10 @@ const App = (props) => {
   const [selected, setSelected] = useState(0)
 
   const getRandomAnecdote = () => {
-    const random = Math.floor(Math.random() * anecdotes.length)
+    let random
+    do {
+      random = Math.floor(Math.random() * anecdotes.length)
+    } while (random === selected)
     setSelected(random)
   }
 
