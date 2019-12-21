@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const CountryList = ({ countries }) => countries.map(country =>
-  <div key={country.name}>{country.name}</div>
+const CountryList = ({ countries, onShow }) => countries.map(country =>
+  <div key={country.name}>
+    {country.name}
+    <button onClick={() => onShow(country.name)}>show</button>
+  </div>
 )
 
 const CountryDetails = ({ country }) => (
@@ -49,7 +52,7 @@ const App = () => {
           ? 'Too many matches, specify another filter'
           : filteredCountries.length === 1
             ? <CountryDetails country={filteredCountries[0]} />
-            : <CountryList countries={filteredCountries} />
+            : <CountryList countries={filteredCountries} onShow={(name) => setFilter(name)} />
       }
       </div>
     </div>
