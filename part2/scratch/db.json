@@ -21,7 +21,7 @@
     {
       "content": "gh",
       "date": "2019-12-21T00:19:19.450Z",
-      "important": false,
+      "important": true,
       "id": 4
     },
     {
@@ -29,6 +29,18 @@
       "date": "2019-12-21T00:21:00.397Z",
       "important": true,
       "id": 5
+    },
+    {
+      "content": "a new refactored note",
+      "date": "2019-12-21T00:52:21.877Z",
+      "important": false,
+      "id": 6
+    },
+    {
+      "content": "new updated note",
+      "date": "2019-12-21T00:55:18.056Z",
+      "important": true,
+      "id": 7
     }
   ]
 }
