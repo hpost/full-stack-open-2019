@@ -26,6 +26,10 @@ const App = () => {
       .then(updatedNote => {
         setNotes(notes.map(note => note.id !== id ? note : updatedNote))
       })
+      .catch(_error => {
+        window.alert(`the note '${note.content}' was already deleted from the server`)
+        setNotes(notes.filter(n => n.id !== id))
+      })
   }
 
   const rows = () => notesToShow.map(note =>
