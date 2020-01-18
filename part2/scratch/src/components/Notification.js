@@ -6,7 +6,7 @@ const Notification = ({ message }) => {
   }
 
   return (
-    <div class="error">
+    <div className="error">
       {message}
     </div>
   )
