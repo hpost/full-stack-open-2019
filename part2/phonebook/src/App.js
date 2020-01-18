@@ -4,6 +4,7 @@ import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import Notification from './components/Notification'
+import ErrorMessage from './components/ErrorMessage'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -11,6 +12,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
   const [notification, setNotification] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const fetchPersons = () => {
     personsService
@@ -36,6 +38,9 @@ const App = () => {
             setPersons(persons.map(p => p.id === updatedPerson.id ? updatedPerson : p))
             setNewName('')
             setNewNumber('')
+          })
+          .catch(error => {
+            showError(`Information of ${person.name} has already been deleted from server`, true)
           })
       }
       return
@@ -64,11 +69,19 @@ const App = () => {
         setPersons(persons.filter(person => person.id !== id))
         showNotification(`Deleted '${name}'`)
       })
+      .catch(error => {
+        showError(`Information of ${name} has already been deleted from server`, true)
+      })
   }
 
   const showNotification = (message) => {
     setNotification(message)
     setTimeout(() => setNotification(null), 3000)
+  }
+
+  const showError = (message) => {
+    setErrorMessage(message)
+    setTimeout(() => setErrorMessage(null), 3000)
   }
 
   const handleNameChange = (event) => setNewName(event.target.value)
@@ -85,6 +98,7 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <Notification message={notification} />
+      <ErrorMessage message={errorMessage} />
       <Filter value={filter} onChange={handleFilterChange} />
       <h3>Add entry</h3>
       <PersonForm
