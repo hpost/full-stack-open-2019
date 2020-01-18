@@ -3,12 +3,14 @@ import personsService from './services/persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [notification, setNotification] = useState(null)
 
   const fetchPersons = () => {
     personsService
@@ -49,6 +51,7 @@ const App = () => {
         setPersons(persons.concat(person))
         setNewName('')
         setNewNumber('')
+        showNotification(`Added '${person.name}'`)
       })
   }
 
@@ -59,7 +62,13 @@ const App = () => {
     personsService.remove(id)
       .then(response => {
         setPersons(persons.filter(person => person.id !== id))
+        showNotification(`Deleted '${name}'`)
       })
+  }
+
+  const showNotification = (message) => {
+    setNotification(message)
+    setTimeout(() => setNotification(null), 3000)
   }
 
   const handleNameChange = (event) => setNewName(event.target.value)
@@ -75,6 +84,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notification} />
       <Filter value={filter} onChange={handleFilterChange} />
       <h3>Add entry</h3>
       <PersonForm
